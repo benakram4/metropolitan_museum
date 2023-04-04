@@ -1,0 +1,55 @@
+* {
+  box-sizing: border-box;
+}
+
+
+.navbar-custom {
+    background-color: #003e6ed8;
+    
+    
+}
+
+.navbar-custom .navbar-container{
+    display: flex;
+    flex-wrap: inherit;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 5px;
+}
+
+.navbar-custom .navbar-brand {
+    font-size: 1.4em;
+    font-weight: 550;
+}
+
+/* change the color of active or hovered links */
+.navbar-custom .nav-link.active{
+    /* add underline */
+    border-bottom: 1px solid #14a2b2fe;
+    font-size: 1.1em;
+}
+
+.navbar-custom .nav-link:hover {
+    color: #14a2b2fe;
+    font-weight: 450;
+}
+
+#btn {
+    --bs-btn-color: #fff;
+    --bs-btn-bg: rgba(20, 163, 179, 0.996);
+    --bs-btn-border-color: rgba(20, 162, 178, 0.996);
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: rgba(20, 162, 178, 0.7);
+    --bs-btn-hover-border-color: rgba(20, 162, 178, 0.7);
+    --bs-btn-focus-shadow-rgb: 59,198,171;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: rgba(20, 162, 178, 0.7);
+    --bs-btn-active-border-color: #128d75;
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0,0,0,.125);
+    --bs-btn-disabled-color: #fff;
+    --bs-btn-disabled-bg: #14a2b2fe;
+    --bs-btn-disabled-border-color: #14a2b2fe;
+}
+
+
+
