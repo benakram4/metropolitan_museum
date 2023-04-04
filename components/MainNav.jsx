@@ -9,6 +9,7 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { useAtom } from 'jotai';
 import { searchHistoryAtom } from '@/store';
+import { addToHistory } from '@/lib/userData';
 
 
 export default function MainNav() {
@@ -19,12 +20,12 @@ export default function MainNav() {
 
     const router = useRouter();
 
-    const searchSubmit = (e) => {
+    const searchSubmit = async (e) => {
         e.preventDefault();
         const searchField = e.target.search.value;
         if (searchField !=="") {
             e.target.search.value = "";
-            setSearchHistory(current => [...current, `title=true&q=${searchField}`]);
+            setSearchHistory(await addToHistory(`title=true&q=${searchField}`)) 
 
             router.push(`/artwork?title=true&q=${searchField}`);
 
