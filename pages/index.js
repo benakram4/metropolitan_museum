@@ -6,7 +6,7 @@
 *  distributed to other students.
 * 
 *  Name: Ben Akram, Student ID: 158523217, Date: 2023.04.05
-*  Vercel App (Deployed) Link: _____________________________________________________
+*  Vercel App (Deployed) Link: https://bti425-assigment6.vercel.app/
 *
 ********************************************************************************/ 
 
