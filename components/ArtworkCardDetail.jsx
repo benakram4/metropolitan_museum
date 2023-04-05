@@ -10,12 +10,14 @@ import { useEffect } from 'react';
 
 export default function ArtworkCardDetail({ objectID }) {
 
+    console.log(`this is the object id: ${objectID}`);
+
     const [favouritesList, setFavouritesList] = useAtom(favouritesAtom);
     const [showAdded, setShowAdded] = useState(false);
 
     useEffect(()=>{
         setShowAdded(favouritesList?.includes(objectID))
-    }, [favouritesList, objectID]) //? note that the instruction don't have the second parameter(ObjectID)
+    }, [favouritesList])
     
 
     const favouritesClicked = async () => {

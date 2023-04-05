@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react';
 import { registerUser } from "../lib/authenticate";
 import { useRouter } from 'next/router';
 
- 
 
 export default function Register(props) {
 

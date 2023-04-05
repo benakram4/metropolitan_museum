@@ -1,14 +1,18 @@
 import { useAtom } from 'jotai';
-import { searchHistoryAtom } from '@/store';
+import { searchHistoryAtom, favouritesAtom } from '@/store';
 import { useRouter } from 'next/router';
-import { ListGroup } from 'react-bootstrap';
-import { Card, Button } from 'react-bootstrap'
+import { Card, Button, ListGroup } from 'react-bootstrap'
 import styles from '@/styles/History.module.css';
+import { removeFromHistory } from '@/lib/userData';
 
 export default function History() {
     // Get a reference to the "searchHistory" from the "searchHistoryAtom
     const [searchHistory, setSearchHistory] = useAtom(searchHistoryAtom);
+    const [favouritesList, setFavouritesList] = useAtom(favouritesAtom);
     const router = useRouter();
+
+
+    if (!searchHistory) return null;
 
     let parsedHistory = [];
 
@@ -20,22 +24,18 @@ export default function History() {
 
     const historyClicked = (e, index) => {
         router.push(`/artwork?${searchHistory[index]}`);
-    } 
+    }
 
-    const removeHistoryClicked = (e, index) => {
+    const removeHistoryClicked = async (e, index) => {
         e.stopPropagation();
-        setSearchHistory(current => {
-            let x = [...current];
-            x.splice(index, 1)
-            return x;
-        });
+        setSearchHistory(await removeFromHistory(searchHistory[index]))
     }
 
     return (
         <div>
             <h1>Search History</h1>
             <hr />
-            { parsedHistory.length > 0 ? (
+            {parsedHistory.length > 0 ? (
                 <ListGroup>
                     {parsedHistory.map((historyItem, index) => (
                         <ListGroup.Item className={styles.historyListItem} key={`${index}`} action onClick={(e) => historyClicked(e, index)}>
@@ -46,17 +46,15 @@ export default function History() {
                         </ListGroup.Item>
                     ))}
                 </ListGroup>
-                ) : (
-                    <Card>
-                        <Card.Body>
-                            <Card.Title>Nothing Here</Card.Title>
-                            <Card.Text>Try searching for some artwork.</Card.Text>
-                        </Card.Body>
-                    </Card>
-                )
+            ) : (
+                <Card>
+                    <Card.Body>
+                        <Card.Title>Nothing Here</Card.Title>
+                        <Card.Text>Try searching for some artwork.</Card.Text>
+                    </Card.Body>
+                </Card>
+            )
             }
         </div>
     );
-                    
-      
 }

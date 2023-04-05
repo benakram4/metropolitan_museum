@@ -1,13 +1,15 @@
 
 /*********************************************************************************
-*  BTI425 – Assignment 5
-*  I declare that this assignment is my own work in accordance with Seneca Academic Policy.  
-*  No part of this assignment has been copied manually or electronically from any other source
-*  (including web sites) or distributed to other students.
+*  BTI425 – Assignment 6
+*  I declare that this assignment is my own work in accordance with Seneca  Academic Policy.  No part of this
+*  assignment has been copied manually or electronically from any other source (including web sites) or 
+*  distributed to other students.
 * 
-*  Name: Ben Akram Student ID: 158523217 Date: 2023.03.12
-*  Link to the live site: https://bti425-assigment5.vercel.app/
+*  Name: Ben Akram, Student ID: 158523217, Date: 2023.04.05
+*  Vercel App (Deployed) Link: _____________________________________________________
+*
 ********************************************************************************/ 
+
 
 import Head from 'next/head'
 import { Row, Col, Image } from 'react-bootstrap'
