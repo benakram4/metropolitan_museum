@@ -10,8 +10,6 @@ import { useEffect } from 'react';
 
 export default function ArtworkCardDetail({ objectID }) {
 
-    console.log(`this is the object id: ${objectID}`);
-
     const [favouritesList, setFavouritesList] = useAtom(favouritesAtom);
     const [showAdded, setShowAdded] = useState(false);
 
