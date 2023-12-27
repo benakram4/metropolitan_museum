@@ -1,5 +1,5 @@
 import { Card, Form, Alert, Button } from "react-bootstrap";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { authenticateUser } from "../lib/authenticate";
 import { useRouter } from "next/router";
 import { useAtom } from "jotai";
@@ -31,20 +31,14 @@ export default function Login(props) {
     }
   }
 
-  return (
-    <>
-      <Card bg="light">
-        <Card.Body>
-          <h2>Login</h2>
-          Enter your login information below:
-          <br />
-          Feel free to signup or use this test account:
-          <br />
-          User: test1
-          <br />
-          Password: test1test1
-        </Card.Body>
-      </Card>
+    return (
+        <>
+            <Card bg="light">
+                <Card.Body>
+                    <h2>Login</h2>
+                    Enter your login information below:
+                </Card.Body>
+            </Card>
 
       <br />
 

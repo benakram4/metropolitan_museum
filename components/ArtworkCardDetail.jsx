@@ -51,38 +51,27 @@ export default function ArtworkCardDetail({ objectID }) {
     dimensions,
   } = data;
 
-  return (
-    <>
-      <Card className="rounded">
-        {primaryImage && <Card.Img variant="top" src={primaryImage} />}
-        <Card.Body>
-          <Card.Title>{title || "N/A"}</Card.Title>
-          <Card.Text>
-            <strong>Date:</strong> {objectDate || "N/A"}
-            <br />
-            <strong>Classification:</strong> {classification || "N/A"}
-            <br />
-            <strong>Medium:</strong> {medium || "N/A"}
-            <br /> <br />
-            <strong>Artist:</strong> {artistDisplayName || "N/A"}(
-            {
-              <a href={artistWikidata_URL} target="_blank" rel="noreferrer">
-                wiki
-              </a>
-            }
-            ) <br />
-            <strong>Credit Line:</strong> {creditLine || "N/A"} <br />
-            <strong>Dimensions:</strong> {dimensions || "N/A"} <br /> <br />
-            <Button
-              id="btn"
-              variant={showAdded ? "primary" : "outline-primary"}
-              onClick={favouritesClicked}
-            >
-              {showAdded ? "+ Favourite (added)" : "+ Favourite"}
-            </Button>
-          </Card.Text>
-        </Card.Body>
-      </Card>
-    </>
-  );
+    return (
+        <>
+            <Card className="rounded">
+                {primaryImage && <Card.Img variant="top" src={primaryImage} />}
+                <Card.Body>
+                    <Card.Title>{title || 'N/A'}</Card.Title>
+                    <Card.Text>
+                        <strong>Date:</strong> {objectDate || 'N/A'}
+                        <br />
+                        <strong>Classification:</strong> {classification || 'N/A'}
+                        <br />
+                        <strong>Medium:</strong> {medium || 'N/A'}
+                        <br /> <br />
+                        <strong>Artist:</strong> {(artistDisplayName || 'N/A')}
+                        ({(<a href={ artistWikidata_URL } target="_blank" rel="noreferrer">wiki</a>)}) <br/>
+                        <strong>Credit Line:</strong> { creditLine || 'N/A'} <br/>
+                        <strong>Dimensions:</strong> { dimensions || 'N/A' } <br /> <br />
+                        <Button id="btn" variant={ showAdded ? "primary" : "outline-primary" } onClick={favouritesClicked}>{ showAdded ? "+ Favourite (added)" : "+ Favourite" }</Button>
+                    </Card.Text>
+                </Card.Body>
+            </Card>
+        </>
+    );
 }
