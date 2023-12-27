@@ -1,70 +1,88 @@
 import { Card, Form, Alert, Button } from "react-bootstrap";
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 import { authenticateUser } from "../lib/authenticate";
-import { useRouter } from 'next/router';
-import { useAtom } from 'jotai';
-import { favouritesAtom, searchHistoryAtom } from "@/store";
-import { getFavourites, getHistory } from "@/lib/userData";
+import { useRouter } from "next/router";
+import { useAtom } from "jotai";
+import { favoritesAtom, searchHistoryAtom } from "@/store";
+import { getFavorites, getHistory } from "@/lib/userData";
 
 export default function Login(props) {
+  const [warning, setWarning] = useState("");
+  const [user, setUser] = useState("");
+  const [password, setPassword] = useState("");
+  const router = useRouter();
+  const [favorites, setFavorites] = useAtom(favoritesAtom);
+  const [searchHistory, setSearchHistory] = useAtom(searchHistoryAtom);
 
-    const [warning, setWarning] = useState("");
-    const [user, setUser] = useState("");
-    const [password, setPassword] = useState("");
-    const router = useRouter();
-    const [favourites, setFavourites] = useAtom(favouritesAtom);
-    const [searchHistory, setSearchHistory] = useAtom(searchHistoryAtom);
+  async function updateAtoms() {
+    setFavorites(await getFavorites());
+    setSearchHistory(await getHistory());
+  }
 
-    async function updateAtoms() {
-        setFavourites(await getFavourites());
-        setSearchHistory(await getHistory());
+  async function handleSubmit(e) {
+    e.preventDefault();
+
+    try {
+      await authenticateUser(user, password);
+      await updateAtoms();
+      router.push("/favorites");
+    } catch (err) {
+      setWarning(err.message);
     }
+  }
 
-    async function handleSubmit(e) {
-        e.preventDefault();
+  return (
+    <>
+      <Card bg="light">
+        <Card.Body>
+          <h2>Login</h2>
+          Enter your login information below:
+          <br />
+          Feel free to signup or use this test account:
+          <br />
+          User: test1
+          <br />
+          Password: test1test1
+        </Card.Body>
+      </Card>
 
-        try {
-            await authenticateUser(user, password);
-            await updateAtoms();
-            router.push("/favourites");
-        } catch (err) {
-            setWarning(err.message);
-        }
+      <br />
 
-    }
+      <Form onSubmit={handleSubmit}>
+        <Form.Group>
+          <Form.Label>User:</Form.Label>
+          <Form.Control
+            type="text"
+            value={user}
+            id="userName"
+            name="userName"
+            onChange={(e) => setUser(e.target.value)}
+          />
+        </Form.Group>
+        <br />
+        <Form.Group>
+          <Form.Label>Password:</Form.Label>
+          <Form.Control
+            type="password"
+            value={password}
+            id="password"
+            name="password"
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </Form.Group>
 
-    return (
-        <>
-            <Card bg="light">
-                <Card.Body>
-                    <h2>Login</h2>
-                    Enter your login information below:
-                </Card.Body>
-            </Card>
-
+        {warning && (
+          <>
             <br />
+            <Alert variant="danger">{warning}</Alert>
+          </>
+        )}
 
-            <Form onSubmit={handleSubmit}>
-                <Form.Group >
-                    <Form.Label>User:</Form.Label>
-                    <Form.Control type="text" value={user} id="userName" name="userName" onChange={e => setUser(e.target.value)} />
-                </Form.Group>
-                <br />
-                <Form.Group>
-                    <Form.Label>Password:</Form.Label>
-                    <Form.Control type="password" value={password} id="password" name="password" onChange={e => setPassword(e.target.value)} />
-                </Form.Group  >
-
-                {warning && <>
-                    <br />
-                    <Alert variant='danger'>
-                        {warning}
-                    </Alert>
-                </>}
-
-                <br />
-                <Button variant="primary" className="pull-right" type="submit">Login</Button>
-            </Form>
-        </>
-    );
+        <br />
+        <Button variant="primary" className="pull-right" type="submit">
+          Login
+        </Button>
+      </Form>
+    </>
+  );
 }

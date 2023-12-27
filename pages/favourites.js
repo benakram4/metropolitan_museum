@@ -1,36 +1,34 @@
-import { Card, Button } from 'react-bootstrap'
-import { Col, Row} from "react-bootstrap";
-import Link from 'next/link'
-import { useAtom } from 'jotai';
-import { favouritesAtom } from '@/store';
-import ArtworkCard from '@/components/ArtworkCard';
+import { Card } from "react-bootstrap";
+import { Col, Row } from "react-bootstrap";
+import { useAtom } from "jotai";
+import { favoritesAtom } from "@/store";
+import ArtworkCard from "@/components/ArtworkCard";
 
-export default function Favourites() {
+export default function Favorites() {
+  const [favoritesList, setFavoritesList] = useAtom(favoritesAtom);
 
-    const [favouritesList, setFavouritesList] = useAtom(favouritesAtom);
+  if (!favoritesList) return null;
 
-    if(!favouritesList) return null;
-
-    return (
-        <>
-            <h1>Your Favourites</h1>
-            <hr />
-            {favouritesList.length > 0 ? (
-                <Row className="gy-4">
-                    {favouritesList.map((currentObjectID) => (
-                        <Col lg={3} key={currentObjectID}>
-                            <ArtworkCard objectID={currentObjectID} />
-                        </Col>
-                    ))}
-                </Row>
-            ) : (
-                <Card>
-                    <Card.Body>
-                        <Card.Title>Nothing Here</Card.Title>
-                        <Card.Text>Try adding some new artwork to the list.</Card.Text>
-                    </Card.Body>
-                </Card>
-            )}
-        </>
-    )
+  return (
+    <>
+      <h1>Your Favorites</h1>
+      <hr />
+      {favoritesList.length > 0 ? (
+        <Row className="gy-4">
+          {favoritesList.map((currentObjectID) => (
+            <Col lg={3} key={currentObjectID}>
+              <ArtworkCard objectID={currentObjectID} />
+            </Col>
+          ))}
+        </Row>
+      ) : (
+        <Card>
+          <Card.Body>
+            <Card.Title>Nothing Here</Card.Title>
+            <Card.Text>Try adding some new artwork to the list.</Card.Text>
+          </Card.Body>
+        </Card>
+      )}
+    </>
+  );
 }
