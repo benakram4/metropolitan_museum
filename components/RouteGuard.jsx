@@ -2,19 +2,19 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { isAuthenticated } from "../lib/authenticate";
 import { useAtom } from "jotai";
-import { favoritesAtom, searchHistoryAtom } from "@/store";
-import { getFavorites, getHistory } from "@/lib/userData";
+import { favouritesAtom, searchHistoryAtom } from "@/store";
+import { getFavourites, getHistory } from "@/lib/userData";
 
 const PUBLIC_PATHS = ["/login", "/", "/_error", "/register"];
 
 export default function RouteGuard({ children }) {
   const router = useRouter();
   const [authorized, setAuthorized] = useState(false);
-  const [favorites, setFavorites] = useAtom(favoritesAtom);
+  const [favourites, setFavourites] = useAtom(favouritesAtom);
   const [searchHistory, setSearchHistory] = useAtom(searchHistoryAtom);
 
   async function updateAtoms() {
-    setFavorites(await getFavorites());
+    setFavourites(await getFavourites());
     setSearchHistory(await getHistory());
   }
 

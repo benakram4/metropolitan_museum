@@ -103,7 +103,7 @@ export default function MainNav() {
             <Nav>
               {token ? (
                 <NavDropdown title={token.userName} id="basic-nav-dropdown">
-                  <Link href="/favorites" legacyBehavior passHref>
+                  <Link href="/favourites" legacyBehavior passHref>
                     <NavDropdown.Item onClick={onNavLinkClick}>
                       Favourite
                     </NavDropdown.Item>

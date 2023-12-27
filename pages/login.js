@@ -3,19 +3,19 @@ import { useState, useEffect } from "react";
 import { authenticateUser } from "../lib/authenticate";
 import { useRouter } from "next/router";
 import { useAtom } from "jotai";
-import { favoritesAtom, searchHistoryAtom } from "@/store";
-import { getFavorites, getHistory } from "@/lib/userData";
+import { favouritesAtom, searchHistoryAtom } from "@/store";
+import { getFavourites, getHistory } from "@/lib/userData";
 
 export default function Login(props) {
   const [warning, setWarning] = useState("");
   const [user, setUser] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
-  const [favorites, setFavorites] = useAtom(favoritesAtom);
+  const [favourites, setFavourites] = useAtom(favouritesAtom);
   const [searchHistory, setSearchHistory] = useAtom(searchHistoryAtom);
 
   async function updateAtoms() {
-    setFavorites(await getFavorites());
+    setFavourites(await getFavourites());
     setSearchHistory(await getHistory());
   }
 
@@ -25,7 +25,7 @@ export default function Login(props) {
     try {
       await authenticateUser(user, password);
       await updateAtoms();
-      router.push("/favorites");
+      router.push("/favourites");
     } catch (err) {
       setWarning(err.message);
     }

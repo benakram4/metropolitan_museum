@@ -3,24 +3,24 @@ import Error from "next/error";
 import { Button, Card } from "react-bootstrap";
 import { useState } from "react";
 import { useAtom } from "jotai";
-import { favoritesAtom } from "@/store";
-import { addToFavorites, removeFromFavorites } from "@/lib/userData";
+import { favouritesAtom } from "@/store";
+import { addToFavourites, removeFromFavourites } from "@/lib/userData";
 import { useEffect } from "react";
 
 export default function ArtworkCardDetail({ objectID }) {
-  const [favoritesList, setFavoritesList] = useAtom(favoritesAtom);
+  const [favouritesList, setFavouritesList] = useAtom(favouritesAtom);
   const [showAdded, setShowAdded] = useState(false);
 
   useEffect(() => {
-    setShowAdded(favoritesList?.includes(objectID));
-  }, [favoritesList]);
+    setShowAdded(favouritesList?.includes(objectID));
+  }, [favouritesList]);
 
-  const favoritesClicked = async () => {
+  const favouritesClicked = async () => {
     if (showAdded) {
-      setFavoritesList(await removeFromFavorites(objectID));
+      setFavouritesList(await removeFromFavourites(objectID));
       setShowAdded(false);
     } else {
-      setFavoritesList(await addToFavorites(objectID));
+      setFavouritesList(await addToFavourites(objectID));
       setShowAdded(true);
     }
   };
@@ -76,7 +76,7 @@ export default function ArtworkCardDetail({ objectID }) {
             <Button
               id="btn"
               variant={showAdded ? "primary" : "outline-primary"}
-              onClick={favoritesClicked}
+              onClick={favouritesClicked}
             >
               {showAdded ? "+ Favourite (added)" : "+ Favourite"}
             </Button>
