@@ -3,6 +3,9 @@
 
 This repository contains the code for a web application that interfaces with the Metropolitan Museum of Art API. The application allows registered users to explore and search the museum’s vast art collections. Users can personalize their experience by adding items to their favorites and their search queries are conveniently saved for future reference. To ensure user privacy and security, all user data is stored in MongoDB and is encrypted.
 
+## Demo
+
+https://metropolitanmuseum.vercel.app/
 
 ## API Reference
 
